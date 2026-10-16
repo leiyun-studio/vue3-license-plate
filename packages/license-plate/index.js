@@ -1,7 +1,5 @@
-import LicensePlate from './license-plate'
+import LicensePlate from './license-plate.vue'
 
-LicensePlate.install = function(Vue) {
-  Vue.component(LicensePlate.name, LicensePlate)
-}
+LicensePlate.install = app => app.component(LicensePlate.name, LicensePlate)
 
-export default LicensePlate;
+export default LicensePlate

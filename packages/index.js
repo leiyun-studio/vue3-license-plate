@@ -1,15 +1,6 @@
-// 导入车牌号输入组件
-import LicensePlate from './license-plate';
+import LicensePlate from './license-plate/index.js'
 
-// 组件列表
-const components = [LicensePlate]
+const install = app => { app.component(LicensePlate.name, LicensePlate) }
 
-const install = function(app) {
-  // 注册全局组件
-  components.map(component => app.component(component.name, component))
-}
-
-export default {
-  install,
-  LicensePlate
-}
+export { LicensePlate }
+export default { install, LicensePlate, version: '1.1.0' }

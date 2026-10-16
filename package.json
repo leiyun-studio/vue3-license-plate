@@ -1,9 +1,6 @@
 {
   "name": "vue3-license-plate",
-  "version": "1.0.2",
-  "private": false,
   "description": "一款基于vue3的车牌号输入控件",
-  "main": "lib/licensePlate.umd.min.js",
   "license": "MIT",
   "keywords": [
     "car",
@@ -11,51 +8,56 @@
     "vue3",
     "license plate"
   ],
+  "version": "1.1.0",
+  "main": "lib/licensePlate.common.js",
+  "module": "lib/licensePlate.esm.mjs",
+  "types": "index.d.ts",
+  "unpkg": "lib/licensePlate.umd.min.js",
+  "files": [
+    "lib",
+    "index.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./lib/licensePlate.esm.mjs",
+      "require": "./lib/licensePlate.common.js"
+    },
+    "./lib/*": "./lib/*",
+    "./package.json": "./package.json"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leiyun1993/vue3-license-plate.git"
+    "url": "https://github.com/leiyun-studio/vue3-license-plate.git"
   },
-  "homepage": "https://github.com/leiyun1993/vue3-license-plate#readme",
+  "homepage": "https://github.com/leiyun-studio/vue3-license-plate#readme",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "lib": "vue-cli-service build --target lib --name licensePlate --dest lib packages/index.js"
+    "serve": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "lib": "node scripts/build-lib.mjs",
+    "test": "node --test tests/*.test.cjs",
+    "test:package": "node --test tests/package.test.cjs",
+    "lint": "node scripts/check.mjs",
+    "typecheck": "tsc --noEmit -p tests/tsconfig.json",
+    "prepack": "npm run lint && npm test && npm run lib && npm run test:package && npm run typecheck"
   },
-  "dependencies": {
-    "core-js": "^3.6.5",
-    "vue": "^3.0.0",
-    "vue3-license-plate": "^1.0.2"
+  "peerDependencies": {
+    "vue": "^3.2.47"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0",
-    "less": "^3.12.2",
-    "less-loader": "^7.1.0",
-    "vue-template-compiler": "^2.6.11"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "vite": "^7.3.7",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "vue": "^3.5.44",
+    "jsdom": "^26.1.0",
+    "typescript": "^5.9.3"
+  }
 }
